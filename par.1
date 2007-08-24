@@ -1180,10 +1180,14 @@ by itself.  Error messages concerning command line
 or environment variable syntax are accompanied by
 the same usage message that the help option produces.
 .LP
-Of course, trying to print an error message would be
+Unless the option
+.BI E
+is set, trying to print an error message would be
 futile if an error resulted from an output function, so
 .B par
-doesn't bother doing any error checking on output functions.
+doesn't bother doing any error checking on output functions if
+.BI E
+is 0.
 .SH EXAMPLES
 .de VS
 .RS -.5i

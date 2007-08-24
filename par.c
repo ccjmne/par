@@ -955,6 +955,11 @@ parcleanup:
   if (props) free(props);
   if (outlines) freelines(outlines);
 
+  if (Err == 1) {
+  	if ( fclose(stdout) == EOF )
+	       	sprintf(errmsg,"%.*s\n",errmsg_size,strerror(errno));
+  }
+
   errout = Err ? stderr : stdout;
   if (*errmsg) fwprintf(errout, L"par error:\n%.*ls", errmsg_size, errmsg);
 #ifdef NOWIDTH
