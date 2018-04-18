@@ -69,8 +69,8 @@ section).
 .LP
 Each output paragraph is generated from the
 corresponding input paragraph as follows:
-.RS
 .LP
+.RS
 .IT 1) An optional prefix and/or suffix
 is removed from each input line.
 .IT 2) The remainder is divided into
@@ -320,7 +320,7 @@ bodiless for some
 .IP "order \fIk\fP bodiless line"
 There is no such thing as an order 0 bodiless line.  Suppose
 .I S
-is a a contiguous subsequence of a segment (see below)
+is a contiguous subsequence of a segment (see below)
 containing at least two lines, containing no order
 .IR k \-1
 bodiless lines, bounded above and below by order
@@ -1085,8 +1085,8 @@ be the fallback suflen of the IP.  The
 characters which are prepended to the
 .IR i th
 line are chosen as follows:
-.RS
 .LP
+.RS
 .IT 1) If
 .I i
 <=
@@ -1123,8 +1123,8 @@ Then to each line is appended
 characters.  The characters which are appended to the
 .IR i th
 line are chosen as follows:
-.RS
 .LP
+.RS
 .IT 1) If
 .I i
 <=
@@ -1189,7 +1189,7 @@ doesn't bother doing any error checking on output functions.
 .RS -.5i
 .LP
 .nf
-.ps -1p
+.ps -1
 .vs -2p
 .ft CW
 ..
@@ -1265,7 +1265,7 @@ are clearly more eye-pleasing.
 .LP
 .B par
 is most useful in conjunction with the text-filtering
-features of an editor, such as the ! commands of
+features of an editor, such as the !\& commands of
 .BR vi .
 You may wish to add the following lines to your
 .B .exrc
@@ -1289,7 +1289,7 @@ following the ctrl-V, plus one at the end of the line.
 To reformat a simple paragraph delimited by blank lines in
 .BR vi ,
 you can put the cursor anywhere in it and type
-\*Q\fB**\fP\*U (star star). If you need to supply
+\*Q\fB**\fP\*U (star star).  If you need to supply
 arguments to par, you can type \*Q\fB*\ \fP\*U
 (star space) instead, then type the arguments.
 .LP
@@ -1785,7 +1785,7 @@ Before:
         amc>
         amc> Par still pays attention to body characters.
         amc> Par should not mistake "Par" for part of the prefix.
-        amc> Par should not mistake "." for a suffix.
+        amc> Par should not mistake ".\&" for a suffix.
 .VE
 .LP
 After
@@ -1799,7 +1799,7 @@ After
         amc> Par still pays attention to body
         amc> characters.  Par should not mistake
         amc> "Par" for part of the prefix.  Par
-        amc> should not mistake "." for a suffix.
+        amc> should not mistake ".\&" for a suffix.
 .VE
 .SH SEE ALSO
 .LP
