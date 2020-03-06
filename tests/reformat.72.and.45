@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+PARTESTRETURN=0
+if [ "$1" != "" ] ; then
+	PAR="$1"
+else
+	PAR="par"
+fi
+
+if test "00dc4c152a926b36b1c84cea836cd780  -" != \
+	"$(${PAR} 72 < tests/data/cicero_de_officiis.ascii \
+	| md5sum)" ; then
+	echo par 72 FAIL
+	echo ----
+	${PAR} 72 < tests/data/cicero_de_officiis.ascii
+	echo ----
+	PARTESTRETURN=1
+else
+	echo par 72 SUCCESS
+fi
+
+if test "c94cfe8e08b6c76541d4b3d93788cdb6  -" != \
+	"$(${PAR} 45 < tests/data/cicero_de_officiis.ascii \
+	| md5sum)" ; then
+	echo par 45 FAIL
+	echo ----
+	${PAR} 45 < tests/data/cicero_de_officiis.ascii
+	echo ----
+	PARTESTRETURN=1
+else
+	echo par 45 SUCCESS
+fi
+exit $PARTESTRETURN
