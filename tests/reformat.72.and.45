@@ -12,24 +12,61 @@ fi
 if test "00dc4c152a926b36b1c84cea836cd780  -" != \
 	"$(${PAR} 72 < tests/data/cicero_de_officiis.ascii \
 	| md5sum)" ; then
-	echo par 72 FAIL
+	echo Cicero par 72 FAIL
 	echo ----
 	${PAR} 72 < tests/data/cicero_de_officiis.ascii
 	echo ----
 	PARTESTRETURN=1
 else
-	echo par 72 SUCCESS
+	echo Cicero par 72 SUCCESS
 fi
 
 if test "c94cfe8e08b6c76541d4b3d93788cdb6  -" != \
 	"$(${PAR} 45 < tests/data/cicero_de_officiis.ascii \
 	| md5sum)" ; then
-	echo par 45 FAIL
+	echo Cicero par 45 FAIL
 	echo ----
 	${PAR} 45 < tests/data/cicero_de_officiis.ascii
 	echo ----
 	PARTESTRETURN=1
 else
-	echo par 45 SUCCESS
+	echo Cicero par 45 SUCCESS
 fi
+
+if test "5a1d6201e8a2c00ff6fbe53931c77c84  -" != \
+	"$(${PAR} 72 < tests/data/seitsemaen_veljestae.latin1 \
+	| md5sum)" ; then
+	echo Kivi Latin 1 par 72 FAIL
+	echo ----
+	${PAR} 72 < tests/data/seitsemaen_veljestae.latin1
+	echo ----
+	PARTESTRETURN=1
+else
+	echo Kivi Latin 1 72 SUCCESS
+fi
+
+if test "e7c71e43eb78f2510f5ceebd6bc4abcb  -" != \
+	"$(${PAR} 45 < tests/data/seitsemaen_veljestae.latin1 \
+	| md5sum)" ; then
+	echo Kivi Latin 1 45 FAIL
+	echo ----
+	${PAR} 45 < tests/data/seitsemaen_veljestae.latin1
+	echo ----
+	PARTESTRETURN=1
+else
+	echo Kivi Latin 1 45 SUCCESS
+fi
+
+if test "4ec8b8d8d58e2c8676fd9ba741d57e6e  -" != \
+	"$(${PAR} 45 < tests/data/seitsemaen_veljestae.utf8 \
+	| md5sum)" ; then
+	echo Kivi UTF-8 45 FAIL
+	echo ----
+	${PAR} 45 < tests/data/seitsemaen_veljestae.utf8
+	echo ----
+	PARTESTRETURN=1
+else
+	echo Kivi UTF-8 45 SUCCESS
+fi
+
 exit $PARTESTRETURN
