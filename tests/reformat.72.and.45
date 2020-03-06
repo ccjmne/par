@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+unset PARINIT
 
 PARTESTRETURN=0
 if [ "$1" != "" ] ; then
@@ -9,7 +10,7 @@ else
 	PAR="par"
 fi
 
-if test "00dc4c152a926b36b1c84cea836cd780  -" != \
+if test "fe312d7f217516ea69f7b40eb5cfb3ce  -" != \
 	"$(${PAR} 72 < tests/data/cicero_de_officiis.ascii \
 	| md5sum)" ; then
 	echo Cicero par 72 FAIL
@@ -21,7 +22,7 @@ else
 	echo Cicero par 72 SUCCESS
 fi
 
-if test "c94cfe8e08b6c76541d4b3d93788cdb6  -" != \
+if test "7c8aceaf81ba7d84a899da0126b7e3b3  -" != \
 	"$(${PAR} 45 < tests/data/cicero_de_officiis.ascii \
 	| md5sum)" ; then
 	echo Cicero par 45 FAIL
@@ -33,7 +34,7 @@ else
 	echo Cicero par 45 SUCCESS
 fi
 
-if test "5a1d6201e8a2c00ff6fbe53931c77c84  -" != \
+if test "cdfb0cd194924a43b9e8dfccb092906c  -" != \
 	"$(${PAR} 72 < tests/data/seitsemaen_veljestae.latin1 \
 	| md5sum)" ; then
 	echo Kivi Latin 1 par 72 FAIL
@@ -45,7 +46,7 @@ else
 	echo Kivi Latin 1 72 SUCCESS
 fi
 
-if test "e7c71e43eb78f2510f5ceebd6bc4abcb  -" != \
+if test "d4171f22b1e76a8a3076939bee041366  -" != \
 	"$(${PAR} 45 < tests/data/seitsemaen_veljestae.latin1 \
 	| md5sum)" ; then
 	echo Kivi Latin 1 45 FAIL
@@ -57,7 +58,19 @@ else
 	echo Kivi Latin 1 45 SUCCESS
 fi
 
-if test "4ec8b8d8d58e2c8676fd9ba741d57e6e  -" != \
+if test "f64f72b60fc89470a96e8e690a039a32  -" != \
+	"$(${PAR} 72 < tests/data/seitsemaen_veljestae.utf8 \
+	| md5sum)" ; then
+	echo Kivi UTF-8 72 FAIL
+	echo ----
+	${PAR} 72 < tests/data/seitsemaen_veljestae.utf8
+	echo ----
+	PARTESTRETURN=1
+else
+	echo Kivi UTF-8 72 SUCCESS
+fi
+
+if test "61239ee5813b7920ab30120a00537609  -" != \
 	"$(${PAR} 45 < tests/data/seitsemaen_veljestae.utf8 \
 	| md5sum)" ; then
 	echo Kivi UTF-8 45 FAIL
@@ -67,6 +80,30 @@ if test "4ec8b8d8d58e2c8676fd9ba741d57e6e  -" != \
 	PARTESTRETURN=1
 else
 	echo Kivi UTF-8 45 SUCCESS
+fi
+
+if test "1717ccbcb3f293c55d5e695f3778e37d  -" != \
+	"$(${PAR} 72 < tests/data/macha.cikani.utf8 \
+	| md5sum)" ; then
+	echo Cikani UTF-8 72 FAIL
+	echo ----
+	${PAR} 72 < tests/data/macha.cikani.utf8
+	echo ----
+	PARTESTRETURN=1
+else
+	echo Cikani UTF-8 72 SUCCESS
+fi
+
+if test "61af59294544fa038eda79909042f078  -" != \
+	"$(${PAR} 45 < tests/data/macha.cikani.utf8 \
+	| md5sum)" ; then
+	echo Cikani UTF-8 45 FAIL
+	echo ----
+	${PAR} 45 < tests/data/macha.cikani.utf8
+	echo ----
+	PARTESTRETURN=1
+else
+	echo Cikani UTF-8 45 SUCCESS
 fi
 
 exit $PARTESTRETURN
