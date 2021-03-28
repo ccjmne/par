@@ -8,7 +8,7 @@ This is ANSI C code (C89).
 
 additem(), copyitems(), and nextitem() rely on the fact that
 sizeof (char) is 1.  See section A7.4.8 of The C Programming
-Language, Second Edition, by Kerninghan and Ritchie.
+Language, Second Edition, by Kernighan and Ritchie.
 
 */
 

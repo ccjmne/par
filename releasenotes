@@ -25,7 +25,7 @@ Par 1.53.0 released 2020-Mar-14
             reported by George V. Reilly (george at reilly.org).
     Added the following features:
         Locale support for single-byte character sets.
-            The previous verson, 1.52, attempted to do this in one line
+            The previous version, 1.52, attempted to do this in one line
             of code (setlocale()), but it's not that simple.  Versions
             before 1.52 gave no thought to character sets other than
             US-ASCII and did not handle them entirely correctly.
@@ -43,7 +43,7 @@ Par 1.53.0 released 2020-Mar-14
             therefore versions before 1.52 did not really support
             non-US-ASCII text.  Version 1.52, by calling setlocale(),
             relaxed the three assumptions in the implementation but
-            not the assumption in the specification, and inadvertantly
+            not the assumption in the specification, and inadvertently
             caused the implementation to deviate from the specification
             by converting all space characters to spaces rather than
             converting only the specified white characters, which is not
@@ -117,7 +117,7 @@ Par 1.50 released 1996-Feb-11
     Added .exrc examples, suggested by Alex Matulich (matuli_a at
         marlin.navsea.navy.mil), though I used my own .exrc.
     Added the Apologies section to par.doc and par.1.
-    Made many other tweeks to the documentation.
+    Made many other tweaks to the documentation.
     Removed the useless synopsis from the runtime help message.
 
 Par 1.41 released 1993-Oct-31

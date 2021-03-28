@@ -339,7 +339,7 @@ static char **readlines(
 
   /* oldqsonly, oldln, and oldquend don't really need to be initialized.   */
   /* They are initialized only to appease compilers that try to be helpful */
-  /* by issuing warnings about unitialized automatic variables.            */
+  /* by issuing warnings about uninitialized automatic variables.            */
 
   iprop.flags = L_INSERTED;
   *errmsg = '\0';
@@ -668,7 +668,7 @@ static void setaffixes(
 )
 /* inlines is an array of strings, up to but not including endline,    */
 /* representing an IP.  inlines and endline must not be equal.  props  */
-/* is the the parallel array of lineprop structures.  *pafp and *pfs   */
+/* is the parallel array of lineprop structures.  *pafp and *pfs       */
 /* are set to the augmented fallback prelen and fallback suflen of the */
 /* IP.  If either of *pprefix, *psuffix is less than 0, it is set to a */
 /* default value as specified in "par.doc".                            */
