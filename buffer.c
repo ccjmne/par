@@ -3,6 +3,7 @@ buffer.c
 last touched in Par 1.53.0
 last meaningful change in Par 1.50
 Copyright 1993, 1996 Adam M. Costello
+Modified by Jérôme Pouiller
 
 This is ANSI C code (C89).
 
@@ -20,6 +21,7 @@ Language, Second Edition, by Kernighan and Ritchie.
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 
 #undef NULL
 #define NULL ((void *) 0)
@@ -62,7 +64,7 @@ buffer *newbuffer(size_t itemsize, errmsg_t errmsg)
   blk = malloc(sizeof (block));
   items = malloc(maxhere * itemsize);
   if (!buf || !blk || !items) {
-    strcpy(errmsg,outofmem);
+    wcscpy(errmsg,outofmem);
     goto nberror;
   }
 
@@ -129,7 +131,7 @@ void additem(buffer *buf, const void *item, errmsg_t errmsg)
       new = malloc(sizeof (block));
       items = malloc(maxhere * itemsize);
       if (!new || !items) {
-        strcpy(errmsg,outofmem);
+        wcscpy(errmsg,outofmem);
         goto aierror;
       }
       blk->next = new;
@@ -176,7 +178,7 @@ void *copyitems(buffer *buf, errmsg_t errmsg)
 
   r = malloc(n * itemsize);
   if (!r) {
-    strcpy(errmsg,outofmem);
+    wcscpy(errmsg,outofmem);
     return NULL;
   }
 

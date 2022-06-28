@@ -3,6 +3,7 @@ charset.h
 last touched in Par 1.53.0
 last meaningful change in Par 1.31
 Copyright 1993 Adam M. Costello
+Modified by Jérôme Pouiller
 
 This is ANSI C code (C89).
 
@@ -15,13 +16,17 @@ always succeed, provided that they are passed valid arguments.
 #ifndef CHARSET_H
 #define CHARSET_H
 
+/* In order to make wchar_t work, we need this definition */
+#define _XOPEN_SOURCE
+
+#include <wchar.h>
 #include "errmsg.h"
 
 
 typedef struct charset charset;
 
 
-charset *parsecharset(const char *str, errmsg_t errmsg);
+charset *parsecharset(const wchar_t *str, errmsg_t errmsg);
 
   /* parsecharset(str,errmsg) returns the set of characters defined by */
   /* str using charset syntax (see par.doc).  Returns NULL on failure. */
@@ -33,7 +38,7 @@ void freecharset(charset *cset);
   /* *cset.  cset may not be used after this call.      */
 
 
-int csmember(char c, const charset *cset);
+int csmember(wchar_t c, const charset *cset);
 
   /* csmember(c,cset) returns 1 if c is a member of *cset, 0 otherwise. */
 

@@ -3,6 +3,7 @@ reformat.h
 last touched in Par 1.53.0
 last meaningful change in Par 1.53.0
 Copyright 1993, 2020 Adam M. Costello
+Modified by Jérôme Pouiller
 
 This is ANSI C code (C89).
 
@@ -11,10 +12,11 @@ This is ANSI C code (C89).
 
 #include "charset.h"
 #include "errmsg.h"
+#include <wchar.h>
 
 
-char **reformat(
-  const char * const *inlines, const char * const *endline, int afp, int fs,
+wchar_t **reformat(
+  const wchar_t * const *inlines, const wchar_t * const *endline, int afp, int fs,
   int hang, int prefix, int suffix, int width, int cap, int fit, int guess,
   int just, int last, int Report, int touch, const charset *terminalchars,
   errmsg_t errmsg

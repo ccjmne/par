@@ -3,6 +3,7 @@ buffer.h
 last touched in Par 1.53.0
 last meaningful change in Par 1.31
 Copyright 1993 Adam M. Costello
+Modified by Jérôme Pouiller
 
 This is ANSI C code (C89).
 

@@ -47,7 +47,7 @@
 
 CPPFLAGS =
 CFLAGS =
-CC = cc $(CPPFLAGS) $(CFLAGS) -c
+CC = cc -std=c99 $(CPPFLAGS) $(CFLAGS) -c
 
 # Define LINK1 and LINK2 so that the command
 #

@@ -3,6 +3,7 @@ errmsg.h
 last touched in Par 1.53.0
 last meaningful change in Par 1.40
 Copyright 1993 Adam M. Costello
+Modified by Jérôme Pouiller
 
 This is ANSI C code (C89).
 
@@ -12,7 +13,7 @@ This is ANSI C code (C89).
 #ifndef ERRMSG_H
 #define ERRMSG_H
 
-
+#include <wchar.h>
 #define errmsg_size 163
 
 /* This is the maximum number of characters that will  */
@@ -21,7 +22,7 @@ This is ANSI C code (C89).
 /* versions of this header file.                       */
 
 
-typedef char errmsg_t[errmsg_size];
+typedef wchar_t errmsg_t[errmsg_size];
 
 /* Any function which takes the argument errmsg_t errmsg must, before */
 /* returning, either set errmsg[0] to '\0' (indicating success), or   */
@@ -29,10 +30,13 @@ typedef char errmsg_t[errmsg_size];
 /* being careful not to overrun the space.                            */
 
 
-extern const char * const outofmem;
+extern const wchar_t * const outofmem;
   /* "Out of memory.\n" */
 
-extern const char * const impossibility;
+extern const wchar_t * const mbserror;
+  /* "Error in input multibyte string.\n" */
+
+extern const wchar_t * const impossibility;
   /* "Impossibility #%d has occurred.  Please report it.\n" */
 
 
