@@ -45,9 +45,9 @@
 # Example (for Solaris 2.x with SPARCompiler C):
 # CC = cc -O -s -Xc -DDONTFREE
 
-CPPFLAGS =
-CFLAGS =
-CC = cc -std=c99 $(CPPFLAGS) $(CFLAGS) -c
+CPPFLAGS ?=
+CFLAGS ?=
+CC ?= cc -std=c99 $(CPPFLAGS) $(CFLAGS) -c
 
 # Define LINK1 and LINK2 so that the command
 #
