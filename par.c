@@ -957,7 +957,8 @@ parcleanup:
 
   if (Err == 1) {
   	if ( fclose(stdout) == EOF )
-	       	sprintf(errmsg,"%.*s\n",errmsg_size,strerror(errno));
+		swprintf(errmsg, errmsg_size,
+			(const wchar_t * restrict)"%.*s\n", errmsg_size, strerror(errno));
   }
 
   errout = Err ? stderr : stdout;
