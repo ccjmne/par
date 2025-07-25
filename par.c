@@ -307,8 +307,8 @@ static wchar_t **readlines(
     c = getwchar();
     if (c == WEOF) {
       if (errno == EILSEQ) {
-      	wcscpy(errmsg, L"Invalid multibyte sequence in input\n");
-	goto rlcleanup;
+        wcscpy(errmsg, L"Invalid multibyte sequence in input\n");
+        goto rlcleanup;
       }
       break;
     }
@@ -388,10 +388,7 @@ static wchar_t **readlines(
         }
         continue;
       }
-      // if (csmember(ch, whitechars)) ch = ' ';
-      if (iswspace(c))
-
-        c = L' ';
+      if (csmember(c, whitechars)) c = L' ';
       else blank = 0;
       additem(cbuf, &c, errmsg);
       if (*errmsg) goto rlcleanup;
@@ -684,7 +681,7 @@ int main(int argc, const char * const *argv)
 
 /* Set the current locale from the environment: */
 
-  setlocale(LC_ALL,"");
+  setlocale(LC_ALL, "");
   langinfo = nl_langinfo(CODESET);
   if (!strcmp(langinfo, "ANSI_X3.4-1968")) {
     // We would like to fallback in an 8 bits encoding, but it is not easily possible.
@@ -772,7 +769,7 @@ int main(int argc, const char * const *argv)
       goto parcleanup;
     }
 
-    arg = wcstok(parinit, (const wchar_t *restrict)whitechars, &state);
+    arg = wcstok(parinit, init_whitechars, &state);
     while (arg) {
       parsearg(arg, &help, &version,
                bodychars, protectchars, quotechars, whitechars, terminalchars,
@@ -780,7 +777,7 @@ int main(int argc, const char * const *argv)
                &body, &cap, &div, &Err, &expel, &fit, &guess,
                &invis, &just, &last, &quote, &Report, &touch, errmsg );
       if (*errmsg || help || version) goto parcleanup;
-      arg = wcstok(NULL, (const wchar_t *restrict)whitechars, &state);
+      arg = wcstok(NULL, init_whitechars, &state);
     }
     free(parinit);
     parinit = NULL;
