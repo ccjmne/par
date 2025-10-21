@@ -64,24 +64,21 @@ static const wflag_t
 #define iscapital(w) (((w)->flags & 4) != 0)
 
 static int getWidth(const wchar_t *beg, const wchar_t *end)
-/* Compute (visual) width of a  word. This function is aware */
-/* about double-width characters used in oriental langages.  */
+/* Compute (visual) width of a word. This function is aware */
+/* about double-width characters used in oriental languages. */
+/* It properly handles combining characters (zero-width).    */
 {
-  int ret, tmp;
+  int ret;
 
-  for (ret = 0; beg != end; beg++) {
 #ifdef NOWIDTH
-    tmp = 1;
+  ret = end - beg;
 #else
-    tmp = wcwidth(*beg);
+  ret = wcswidth(beg, end - beg);
+  /* wcswidth returns -1 if the string contains non-printable characters. */
+  /* In that case, fall back to character count. */
+  if (ret < 0)
+    ret = end - beg;
 #endif
-    // BUG: It is not really easy to handle case of zero width characters.
-    // If we don't do this, size mallloc for q1 will be less than real
-    // size and program will segfault. So I prefer to have a bug than a segfault.
-    if (tmp <= 0)
-      tmp = 1;
-    ret += tmp;
-  }
 
   return ret;
 }
@@ -494,6 +491,7 @@ wchar_t **reformat(
   numout = 0;
   w1 = head->next;
   while (numout < hang || w1) {
+    int charcount;  /* Actual character count for allocation */
     if (w1)
       for (w2 = w1->next, numgaps = 0, extra = L - w1->width;
            w2 != w1->nextline;
@@ -501,7 +499,26 @@ wchar_t **reformat(
     linelen = suffix || (just && (w2 || last)) ?
                 L + affix :
                 w1 ? prefix + L - extra : prefix;
-    q1 = malloc((linelen + 1) * sizeof (wchar_t));
+    /* Calculate actual character count needed for allocation.
+     * This accounts for combining characters which have zero width
+     * but still consume a wchar_t slot. */
+    charcount = prefix + suffix;
+    if (w1) {
+      for (w2 = w1; w2 != w1->nextline; w2 = w2->next) {
+        charcount += w2->length;
+        if (w2->next != w1->nextline)
+          charcount += 1;  /* space between words */
+        if (isshifted(w2))
+          charcount += 1;  /* additional shift space */
+      }
+    }
+    /* Add space for justification padding */
+    if (just && w1 && (w1->nextline || last) && numgaps > 0)
+      charcount += extra;
+    /* Ensure we allocate at least linelen to handle padding spaces */
+    if (charcount < linelen)
+      charcount = linelen;
+    q1 = malloc((charcount + 1) * sizeof (wchar_t));
     if (!q1) {
       wcscpy(errmsg,outofmem);
       goto rfcleanup;
