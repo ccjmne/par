@@ -1,0 +1,10 @@
+Unicode combining characters should be handled correctly by par. For
+example, É can be represented as E followed by a combining acute accent
+(U+0301). Similarly, è can be written as e followed by combining grave
+accent (U+0300).
+
+When reformatting text, par should count these as single visual units,
+not as two separate characters. This is important for proper line
+breaking and width calculation.
+
+Test cases include: café, naïve, Zürich, and résumé.
